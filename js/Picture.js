@@ -41,7 +41,7 @@ const hexagon = () => {
 	for(let i = 0; i<9; i++){	
 		for (let j =0; j <=	6; j++) {
 			let tile = document.createElement('button');
-			// tile.style.backgroundImage= 'url("../img/tile.JPG")'; 
+			tile.style.backgroundImage= 'url("https://beata-piech.github.io/img/tile.JPG")'; 
 			tile.classList.add('ghost');
 			foreheads[j].appendChild(tile);
 		};
