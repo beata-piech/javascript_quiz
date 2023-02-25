@@ -25,7 +25,6 @@ const Picture = () => {
 	const addBackPict = () => {
 		fetch(`https://source.unsplash.com/random/${pictWidth}x${pictHeight}/?cities`).then((response)=> {
 				sideBack.src = response.url;
-
 				console.log(response.status);
 				console.log(sideBack.src)
 		})
