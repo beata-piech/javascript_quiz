@@ -5,8 +5,8 @@ const items = [
 		correctAnswer: '141'
 	},
 	{
-		question: 'How many times can you subtract 10 from the number 30 ?',
-		answers: ['three', 'two','only once'],
+		question: 'How many times can you subtract 10 from the number 30?',
+		answers: ['only once', 'two', 'three'],
 		correctAnswer: 'only once'
 	},
 	{
@@ -28,8 +28,7 @@ const items = [
 		question: 'Adding the numbers between 1 to 100 consecutively (1+2+3+4+…) gives you what final answer? ',
 		answers: [ '4950', '5050', '5051'],
 		correctAnswer: '5050'
-	},
-	
+	}
 ];
 
 export default items;
