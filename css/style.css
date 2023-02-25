@@ -1,23 +1,36 @@
 body {
   margin: 0;
   padding: 0;
-  font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
-    "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+  font-family: "Geneva","Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
+    "Lucida Sans Unicode",  "Verdana", sans-serif;
 }
 h2 {
   margin-bottom: 0;
 }
 h3 {
-  margin-top: 0;
+  margin-top: 2%;
+  /* padding: 3% 2%; */
 }
 div#container {
   display: inline-grid;
   grid-template-columns: 1fr 1fr;
   gap: 0 1rem;
+  width: 100%;
 }
 article#quiz,
 section#picture {
   margin: 2rem 3rem;
+}
+form{
+  background-color: rgb(208, 229, 237);
+  border-radius: 5px;
+  padding: 3% 2%;
+  margin-top: 4%;
+  -webkit-filter: drop-shadow(0px 0px 5px yellow);
+    -moz-filter: drop-shadow(0px 0px 5px yellow);
+    -ms-filter: drop-shadow(0px 0px 5px yellow);
+    -o-filter: drop-shadow(0px 0px 5px yellow);
+    filter: drop-shadow(10px 10px 5px rgb(6, 90, 113));
 }
 img#side_back {
   width: 300px;
@@ -119,8 +132,14 @@ button#uncover-btn {
   background-color: rgb(199, 199, 199);
 }
 span#log {
-  line-height: 1.2rem;
+  line-height: 1.4rem;
 }
 p#info {
-  font-weight: 900;
+  font-size: 1.2rem;
+  font-weight: bold;
+  margin-bottom: 2%;
+  
+}
+div#sec{
+  margin: 4% 2%;
 }

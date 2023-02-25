@@ -11,15 +11,16 @@ const hideTile = () => {
 	single.addEventListener("click",onClick, false);
 
 	function onClick(event){
+		event.preventDefault();
 		event.stopImmediatePropagation();
 		newCount = newCount + 1;		
 		if(newCount < 4 ){
 		console.log(event, "clicked to uncover", single);
 		this.style.visibility = "hidden";
 		}else{
-		console.log("Whatahack");
-	}
-	event.preventDefault;
+			alert("no clicks available");
+			console.log("no clicks available");
+		}
 	}
 }
 console.log(newCount);
@@ -30,19 +31,21 @@ quiz.innerHTML = `
 	<h2>Do you know what's behind the wall?</h2>
 	
 	<form>
-		<h3>Answer each question and remove any 3 tiles.</h3>
+		<h3>Answer the question and remove any 3 tiles.</h3>
 		<p class="question" >${items[0].question}</p>
-		<input type="radio" name="answer" value="${items[0].answers[0]}" id="answ0" class="answer" />
-					<label for="answ0" id="choice0" class="choice" value="0">${items[0].answers[0]}</label><br>
-		<input type="radio" name="answer" value="${items[0].answers[1]}" id="answ1" class="answer" />
-					<label for="answ1" id="choice1" class="choice">${items[0].answers[1]}</label><br>
-		<input type="radio" name="answer" value="${items[0].answers[2]}" id="answ2" class="answer" />
-					<label for="answ2" id="choice2" class="choice">${items[0].answers[2]}</label><br>
+		<input type="radio" id="answ0" class="answer" name="selection" value="${items[0].answers[0]}" />
+			<label for="answ0" id="choice0" class="choice" value=0>${items[0].answers[0]}</label><br>
+		<input type="radio" id="answ1" class="answer" name="selection" value="${items[0].answers[1]}" />
+			<label for="answ1" id="choice1" class="choice">${items[0].answers[1]}</label><br>
+		<input type="radio" id="answ2" class="answer" name="selection" value="${items[0].answers[2]}" />
+			<label for="answ2" id="choice2" class="choice">${items[0].answers[2]}</label><br>
 
 		<button type="submit" id="submit-btn" >Submit</button>
 	</form>
-	<p id="info"></p>
-	<span id="log"></span></br>
+	<div id="sec">
+		<p id="info"></p>
+		<span id="log"></span></br>
+	</div>
 	<button id="next-btn">Next question</button></br>	
 `
 let nextBtn = quiz.querySelector("#next-btn");
@@ -58,7 +61,7 @@ let statedAnswer = items[0].correctAnswer;
 
 const nextQuestion = (questCurrentIndex = 0) => {
 	nextBtn.addEventListener("click", (event) => {
-		
+		event.preventDefault();
 		submitBtn.style.display = "block";
 		nextBtn.style.display = "none";
 		logInfo.innerText = "";
@@ -75,8 +78,6 @@ const nextQuestion = (questCurrentIndex = 0) => {
 				let allAnswers = questAnswers[e];
 				allAnswers.innerHTML = items[questCurrentIndex].answers[e];
 			}
-			//  !!!!!-don't delete this, check it again
-			event.preventDefault();
 		}else{
 			submitBtn.style.display = "none";
 			form.style.display = "none";
@@ -89,10 +90,9 @@ const nextQuestion = (questCurrentIndex = 0) => {
 console.log(uncoverBtn);
 			logInfo.innerText = "That was the last question. \n" + "Click to see the picture"
 			uncoverBtn.addEventListener('click', (event)=> {
-				event.preventDefault;
+				event.preventDefault();	
 				let frontToUncover = document.querySelector("#side_front");
 				frontToUncover.style.display = "none";
-			event.preventDefault();	
 			})
 
 		}
@@ -102,21 +102,22 @@ console.log(uncoverBtn);
 nextQuestion();
 
 const submit = () => {
-	form.addEventListener("submit", 
-	(event) => {
+	form.addEventListener("submit", (event) => {
+		event.preventDefault();
 		let itemAnswers = document.getElementsByTagName("input");
 		for (let r = 0; r < itemAnswers.length; r++){
 			let rb = itemAnswers[r];
 			if (rb.checked) {
 				let tickedAnswer = rb.nextElementSibling.innerHTML;
+				let ansToDisplay=`<span style="font: 1.2rem 'Verdana'; font-weight: bold;">`+ tickedAnswer + `</span>`;
 				if(tickedAnswer === statedAnswer){
 					 newCount = 0;
 					console.log("OK")
 					
 					info.innerText = "Good job - remove 3 tiles!";
 					info.style.color ="rgb(0, 97, 8)";	
-					logInfo.innerText = "Your answer: ' " + `${tickedAnswer}` + " ' is CORRECT. \n" 
-					+ "Click 3 tiles and try to guess what place is on the picture.";
+					
+					logInfo.innerHTML = `Your answer:  ${ansToDisplay}  is CORRECT.<br> Click 3 tiles and try to guess what place's on the picture.`;
 					hideTile();
 					
 					submitBtn.style.display = "none";
@@ -125,13 +126,13 @@ const submit = () => {
 						console.log("NOT");
 					info.innerText = "Oops! Maybe next time.";
 					info.style.color ="rgb(184, 0, 0)";
-					logInfo.innerText = "Your answer: ' " + `${tickedAnswer}` + " ' is NOT CORRECT.";
+					logInfo.innerHTML = `Your answer: ${ansToDisplay}  is NOT CORRECT.`;
 					submitBtn.style.display = "none";
 					nextBtn.style.display = "block";
 				}
 					rb.checked = false;
 			}
-			event.preventDefault();
+			
 		}
 		
 	}			, false );
