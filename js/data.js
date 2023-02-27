@@ -5,9 +5,9 @@ const items = [
 		correctAnswer: '141'
 	},
 	{
-		question: 'How many times can you subtract 10 from the number 30?',
-		answers: ['only once', 'two', 'three'],
-		correctAnswer: 'only once'
+		question: 'I am an odd number. Take away one letter and I become even. What number am I?',
+		answers: [ '1', '3', '7'],
+		correctAnswer: '7'
 	},
 	{
 		question: 'Which number should come next in this series: 10, 17, 26, 37, ... ?',
@@ -19,10 +19,11 @@ const items = [
 		answers: [ '10', '8', '5'],
 		correctAnswer: '10'
 	},
+	
 	{
-		question: 'I am an odd number. Take away one letter and I become even. What number am I?',
-		answers: [ '1', '3', '7'],
-		correctAnswer: '7'
+		question: 'How many times can you subtract 10 from the number 30?',
+		answers: ['only once', 'two', 'three'],
+		correctAnswer: 'only once'
 	},
 	{
 		question: 'Adding the numbers between 1 to 100 consecutively (1+2+3+4+…) gives you what final answer? ',

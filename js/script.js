@@ -4,26 +4,20 @@ let allGhosts = document.querySelectorAll(".ghost");
 let newCount;	
 //onClick event on the tile to uncover the hidden image, max 3 clicks available  
 const hideTile = () => {
-// for(let single = 0; single < allGhosts.length; single++){
 	for(let single of allGhosts){
-	// console.log();
-	// singleGost = allGhosts[single];
-	single.addEventListener("click",onClick, false);
-
-	function onClick(event){
-		event.preventDefault();
-		event.stopImmediatePropagation();
-		newCount = newCount + 1;		
-		if(newCount < 4 ){
-		console.log(event, "clicked to uncover", single);
-		this.style.visibility = "hidden";
-		}else{
-			alert("no clicks available");
-			console.log("no clicks available");
+		function onClick(event){
+			event.preventDefault();
+			event.stopImmediatePropagation();
+			newCount = newCount + 1;		
+			if(newCount < 4 ){
+				this.style.visibility = "hidden";
+				// console.log(event, "clicked to uncover", single);
+			}else{
+				alert("No clicks available");
+			}
 		}
+		single.addEventListener("click",onClick, false);
 	}
-}
-console.log(newCount);
 }
 
 const quiz = document.querySelector("article");
@@ -51,7 +45,7 @@ quiz.innerHTML = `
 let nextBtn = quiz.querySelector("#next-btn");
 let submitBtn = quiz.querySelector("#submit-btn");
 let itemQuestion = quiz.querySelector(".question");
-const form = document.querySelector("form");
+let form = document.querySelector("form");
 let logInfo = quiz.querySelector("#log");
 let info = quiz.querySelector("#info");
 
@@ -73,31 +67,27 @@ const nextQuestion = (questCurrentIndex = 0) => {
 			itemQuestion.innerHTML = items[questNextIndex].question;
 			statedAnswer = items[questNextIndex].correctAnswer;
 			questCurrentIndex = questNextIndex;
-			console.log(questCurrentIndex, "items legth: ", items.length, items[questNextIndex]);
-			for (let e = 0 ; e < questAnswers.length; e++) {
-				let allAnswers = questAnswers[e];
-				allAnswers.innerHTML = items[questCurrentIndex].answers[e];
+			// console.log(questCurrentIndex, "items legth: ", items.length, items[questNextIndex]);
+			for (let i = 0 ; i < questAnswers.length; i++) {
+				let allAnswers = questAnswers[i];
+				allAnswers.innerHTML = items[questCurrentIndex].answers[i];
 			}
 		}else{
 			submitBtn.style.display = "none";
 			form.style.display = "none";
-			console.log("nothing to display");
-			console.log(picture);
 			let uncoverBtn = document.createElement("button");
 			uncoverBtn.setAttribute("id", "uncover-btn");
 			uncoverBtn.innerHTML = `Uncover`;
-			quiz.append(uncoverBtn);
-console.log(uncoverBtn);
-			logInfo.innerText = "That was the last question. \n" + "Click to see the picture"
+			let secSeg = document.querySelector("#sec");
+			secSeg.append(uncoverBtn);
+			logInfo.innerText = "That was the last question. \n \n" + "Click to see the picture"
 			uncoverBtn.addEventListener('click', (event)=> {
 				event.preventDefault();	
 				let frontToUncover = document.querySelector("#side_front");
 				frontToUncover.style.display = "none";
 			})
-
 		}
-	}, 
-	false)
+	}, false)
 }
 nextQuestion();
 
@@ -111,31 +101,21 @@ const submit = () => {
 				let tickedAnswer = rb.nextElementSibling.innerHTML;
 				let ansToDisplay=`<span style="font: 1.2rem 'Verdana'; font-weight: bold;">`+ tickedAnswer + `</span>`;
 				if(tickedAnswer === statedAnswer){
-					 newCount = 0;
-					console.log("OK")
-					
+					newCount = 0;
 					info.innerText = "Good job - remove 3 tiles!";
 					info.style.color ="rgb(0, 97, 8)";	
-					
 					logInfo.innerHTML = `Your answer:  ${ansToDisplay}  is CORRECT.<br> Click 3 tiles and try to guess what place's on the picture.`;
 					hideTile();
-					
-					submitBtn.style.display = "none";
-					nextBtn.style.display = "block";
 				} else {
-						console.log("NOT");
 					info.innerText = "Oops! Maybe next time.";
 					info.style.color ="rgb(184, 0, 0)";
 					logInfo.innerHTML = `Your answer: ${ansToDisplay}  is NOT CORRECT.`;
-					submitBtn.style.display = "none";
-					nextBtn.style.display = "block";
 				}
-					rb.checked = false;
+				rb.checked = false;
+				submitBtn.style.display = "none";
+				nextBtn.style.display = "block";
 			}
-			
 		}
-		
-	}			, false );
+	}, false );
 }
-
 submit();
